@@ -3,7 +3,7 @@ import * as cheerio from "cheerio";
 import fs from "fs";
 import { fileURLToPath } from "url";
 import { validateAndGetCompany } from "./company.js";
-import { querySOLRByCompany, querySOLR, deleteJobByUrl, upsertJobs } from "./solr.js";
+import { querySOLRByCompany, querySOLR, deleteJobsByCIF, upsertJobs } from "./solr.js";
 
 const COMPANY_CIF = "5665609";
 const TIMEOUT = 15000;
@@ -40,8 +40,20 @@ async function searchJobRapid(brand) {
       $('a[href*="/locuri-de-munca/"]').each((i, el) => {
         const href = $(el).attr('href');
         const title = $(el).text().trim();
-        if (href && title && !jobs.find(j => j.url === href)) {
-          const url = href.startsWith('http') ? href : `https://www.jobrapid.ro${href}`;
+        if (!href || !title) return;
+
+        const segments = href.replace(/^https?:\/\/[^\/]+/, '').split('/').filter(Boolean);
+        if (segments.length < 3) return;
+
+        const isJobUrl = /^[a-z0-9-]+$/.test(segments[2]) && segments[2].length > 10;
+        if (!isJobUrl) return;
+
+        if (href.includes('/cauta') || href.includes('/companie/') || href.includes('/login') ||
+            href.includes('/companii') || href.includes('/aplicat') || href.includes('/salvat') ||
+            href.includes('/contul') || href.includes('/setari')) return;
+
+        const url = href.startsWith('http') ? href : `https://www.jobrapid.ro${href}`;
+        if (!jobs.find(j => j.url === url)) {
           jobs.push({ url, title, source: "jobRapid.ro" });
         }
       });
@@ -55,205 +67,12 @@ async function searchJobRapid(brand) {
   return jobs;
 }
 
-async function searchJobradar24(brand) {
-  const jobs = [];
-  const searchUrl = `https://www.jobradar24.ro/anunturi?q=${encodeURIComponent(brand)}`;
-
-  try {
-    console.log(`Searching jobradar24.ro: ${searchUrl}`);
-    const res = await fetch(searchUrl, {
-      timeout: TIMEOUT,
-      headers: {
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
-        "Accept-Language": "ro-RO,ro;q=0.9,en;q=0.8"
-      }
-    });
-
-    if (!res.ok) {
-      console.log(`  jobradar24.ro returned ${res.status}`);
-      return jobs;
-    }
-
-    const html = await res.text();
-    const $ = cheerio.load(html);
-
-    $('a[href*="/anunt/"]').each((i, el) => {
-      const href = $(el).attr('href');
-      const title = $(el).text().trim();
-      if (href && title && !href.includes('/companie/')) {
-        const url = href.startsWith('http') ? href : `https://www.jobradar24.ro${href}`;
-        if (!jobs.find(j => j.url === url)) {
-          jobs.push({ url, title, source: "jobradar24.ro" });
-        }
-      }
-    });
-
-    console.log(`  Found ${jobs.length} jobs on jobradar24.ro`);
-  } catch (err) {
-    console.log(`  jobradar24.ro error: ${err.message}`);
-  }
-
-  return jobs;
+function isKnownGoodUrl(url) {
+  return url.includes('mediere.anofm.ro') || url.includes('jobrapid.ro') || url.includes('anofm.ro');
 }
 
-async function searchEJobs(brand) {
-  const jobs = [];
-  const searchUrl = `https://www.e-jobs.ro/rezultate-cautare?cuvant=${encodeURIComponent(brand)}`;
-
-  try {
-    console.log(`Searching e-jobs.ro: ${searchUrl}`);
-    const res = await fetch(searchUrl, {
-      timeout: TIMEOUT,
-      headers: {
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
-        "Accept-Language": "ro-RO,ro;q=0.9,en;q=0.8"
-      }
-    });
-
-    if (!res.ok) {
-      console.log(`  e-jobs.ro returned ${res.status}`);
-      return jobs;
-    }
-
-    const html = await res.text();
-    const $ = cheerio.load(html);
-
-    $('.job-title a, a[href*="/anunt/"]').each((i, el) => {
-      const href = $(el).attr('href');
-      const title = $(el).text().trim();
-      if (href && title) {
-        const url = href.startsWith('http') ? href : `https://www.e-jobs.ro${href}`;
-        jobs.push({ url, title, source: "e-jobs.ro" });
-      }
-    });
-
-    console.log(`  Found ${jobs.length} jobs on e-jobs.ro`);
-  } catch (err) {
-    console.log(`  e-jobs.ro error: ${err.message}`);
-  }
-
-  return jobs;
-}
-
-async function searchBestJobs(brand) {
-  const jobs = [];
-  const searchUrl = `https://www.bestjobs.ro/jobs/search?query=${encodeURIComponent(brand)}`;
-
-  try {
-    console.log(`Searching bestjobs.ro: ${searchUrl}`);
-    const res = await fetch(searchUrl, {
-      timeout: TIMEOUT,
-      headers: {
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
-        "Accept": "application/json, text/html, */*"
-      }
-    });
-
-    if (!res.ok) {
-      console.log(`  bestjobs.ro returned ${res.status}`);
-      return jobs;
-    }
-
-    const html = await res.text();
-    const $ = cheerio.load(html);
-
-    $('a[href*="/job/"]').each((i, el) => {
-      const href = $(el).attr('href');
-      const title = $(el).text().trim();
-      if (href && title) {
-        const url = href.startsWith('http') ? href : `https://www.bestjobs.ro${href}`;
-        if (!jobs.find(j => j.url === url)) {
-          jobs.push({ url, title, source: "bestjobs.ro" });
-        }
-      }
-    });
-
-    console.log(`  Found ${jobs.length} jobs on bestjobs.ro`);
-  } catch (err) {
-    console.log(`  bestjobs.ro error: ${err.message}`);
-  }
-
-  return jobs;
-}
-
-async function searchHipo(brand) {
-  const jobs = [];
-  const searchUrl = `https://www.hipo.ro/locuri-de-munca/cauta/${encodeURIComponent(brand)}`;
-
-  try {
-    console.log(`Searching hipo.ro: ${searchUrl}`);
-    const res = await fetch(searchUrl, {
-      timeout: TIMEOUT,
-      headers: {
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
-      }
-    });
-
-    if (!res.ok) {
-      console.log(`  hipo.ro returned ${res.status}`);
-      return jobs;
-    }
-
-    const html = await res.text();
-    const $ = cheerio.load(html);
-
-    $('a[href*="/locuri-de-munca/"], a.job-title, h3.job-title a').each((i, el) => {
-      const href = $(el).attr('href');
-      const title = $(el).text().trim();
-      if (href && title) {
-        const url = href.startsWith('http') ? href : `https://www.hipo.ro${href}`;
-        if (!jobs.find(j => j.url === url)) {
-          jobs.push({ url, title, source: "hipo.ro" });
-        }
-      }
-    });
-
-    console.log(`  Found ${jobs.length} jobs on hipo.ro`);
-  } catch (err) {
-    console.log(`  hipo.ro error: ${err.message}`);
-  }
-
-  return jobs;
-}
-
-async function searchOlx(brand) {
-  const jobs = [];
-  const searchUrl = `https://www.olx.ro/locuri-de-munca/q-${encodeURIComponent(brand)}/`;
-
-  try {
-    console.log(`Searching olx.ro: ${searchUrl}`);
-    const res = await fetch(searchUrl, {
-      timeout: TIMEOUT,
-      headers: {
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
-      }
-    });
-
-    if (!res.ok) {
-      console.log(`  olx.ro returned ${res.status}`);
-      return jobs;
-    }
-
-    const html = await res.text();
-    const $ = cheerio.load(html);
-
-    $('a[href*="/d/"]').each((i, el) => {
-      const href = $(el).attr('href');
-      const title = $(el).attr('title') || $(el).text().trim();
-      if (href && title && !href.includes('olx.ro/d/')) {
-        const url = href.startsWith('http') ? href : `https://www.olx.ro${href}`;
-        if (!jobs.find(j => j.url === url)) {
-          jobs.push({ url, title, source: "olx.ro" });
-        }
-      }
-    });
-
-    console.log(`  Found ${jobs.length} jobs on olx.ro`);
-  } catch (err) {
-    console.log(`  olx.ro error: ${err.message}`);
-  }
-
-  return jobs;
+function filterLegitimateJobs(jobs) {
+  return jobs.filter(j => isKnownGoodUrl(j.url));
 }
 
 async function searchAllPortals(brand, testOnly = false) {
@@ -262,12 +81,7 @@ async function searchAllPortals(brand, testOnly = false) {
   const allJobs = [];
 
   const searches = [
-    searchJobRapid(brand),
-    searchJobradar24(brand),
-    searchEJobs(brand),
-    searchBestJobs(brand),
-    searchHipo(brand),
-    searchOlx(brand)
+    searchJobRapid(brand)
   ];
 
   const results = await Promise.allSettled(searches);
@@ -405,8 +219,11 @@ async function main() {
       console.log("Test mode: skipping portal search");
     }
 
-    console.log(`\n=== Step 4: Process jobs ===`);
-    const updatedExisting = addCifToExistingJobs(existingJobs, cif, COMPANY_NAME);
+    console.log(`\n=== Step 4: Filter existing jobs ===`);
+    const legitExisting = filterLegitimateJobs(existingJobs);
+    console.log(`Existing jobs kept (known-good sources): ${legitExisting.length} (rejected ${existingJobs.length - legitExisting.length})`);
+
+    const updatedExisting = addCifToExistingJobs(legitExisting, cif, COMPANY_NAME);
     const newJobs = portalJobs.map(job => mapToJobModel(job, cif));
 
     const allJobs = [...updatedExisting, ...newJobs];
@@ -436,10 +253,13 @@ async function main() {
     fs.writeFileSync("jobs.json", JSON.stringify(transformedPayload, null, 2), "utf-8");
     console.log("Saved jobs.json");
 
-    console.log("\n=== Step 5: Upsert jobs to SOLR ===");
+    console.log("\n=== Step 5: Delete old jobs by CIF ===");
+    await deleteJobsByCIF(cif);
+
+    console.log("\n=== Step 6: Upsert clean jobs to SOLR ===");
     await upsertJobs(transformedPayload.jobs);
 
-    console.log("\n=== Step 6: Verify ===");
+    console.log("\n=== Step 7: Verify ===");
     const finalResult = await querySOLR(cif);
     console.log(`\n📊 === SUMMARY ===`);
     console.log(`📊 Jobs existing in SOLR before: ${existingJobs.length}`);
@@ -456,7 +276,7 @@ async function main() {
   }
 }
 
-export { mapToJobModel, transformJobsForSOLR, searchAllPortals };
+export { mapToJobModel, transformJobsForSOLR };
 
 if (process.argv[1] === fileURLToPath(import.meta.url)) {
   main();
