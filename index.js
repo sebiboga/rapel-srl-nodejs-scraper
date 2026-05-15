@@ -277,7 +277,7 @@ async function main() {
   }
 }
 
-export { mapToJobModel, transformJobsForSOLR };
+export { mapToJobModel, transformJobsForSOLR, searchAllPortals };
 
 if (process.argv[1] === fileURLToPath(import.meta.url)) {
   main();
