@@ -141,13 +141,22 @@ export async function deleteJobByUrl(url) {
   }
 }
 
+function stripInternalFields(jobs) {
+  return jobs.map(job => {
+    const clean = { ...job };
+    delete clean._version_;
+    return clean;
+  });
+}
+
 export async function upsertJobs(jobs) {
   const AUTH = process.env.SOLR_AUTH;
   if (!AUTH) throw new Error("SOLR_AUTH not set in environment");
 
   const params = new URLSearchParams({ commit: "true" });
 
-  const body = JSON.stringify(jobs);
+  const cleanJobs = stripInternalFields(jobs);
+  const body = JSON.stringify(cleanJobs);
 
   const res = await fetch(`${SOLR_URL}/update?${params}`, {
     method: "POST",
