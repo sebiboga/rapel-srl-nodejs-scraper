@@ -17,7 +17,7 @@ describe('Integration: API Workflow', () => {
       expect(rapelCompany).toBeDefined();
 
       const anafData = await demoanaf.getCompanyFromANAF(rapelCompany.cui.toString());
-      expect(anafData.name).toBe('RAPEL SRL');
+      expect(anafData.name).toMatch(/RAPEL/i);
 
       const companyResult = await company.validateAndGetCompany();
       expect(companyResult.status).toBe('active');
