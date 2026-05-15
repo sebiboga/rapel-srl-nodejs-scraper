@@ -42,15 +42,16 @@ async function searchJobRapid(brand) {
         const title = $(el).text().trim();
         if (!href || !title) return;
 
-        const segments = href.replace(/^https?:\/\/[^\/]+/, '').split('/').filter(Boolean);
-        if (segments.length < 3) return;
+        const slug = href.replace(/^https?:\/\/[^\/]+/, '').replace(/^\//, '');
+        const parts = slug.split('/');
+        if (parts.length < 2) return;
 
-        const isJobUrl = /^[a-z0-9-]+$/.test(segments[2]) && segments[2].length > 10;
-        if (!isJobUrl) return;
+        const path = parts.slice(1).join('/');
 
-        if (href.includes('/cauta') || href.includes('/companie/') || href.includes('/login') ||
-            href.includes('/companii') || href.includes('/aplicat') || href.includes('/salvat') ||
-            href.includes('/contul') || href.includes('/setari')) return;
+        if (/^\s*(cauta|login|cont|compani[ei]|aplicat|salvat|contact|setari|termeni|confidentialitate|sitemap|ajutor|intrebari|facebook|linkedin|google|instagram|twitter)/i.test(path)) return;
+        if (path.includes('/')) return;
+
+        if (path.length < 15) return;
 
         const url = href.startsWith('http') ? href : `https://www.jobrapid.ro${href}`;
         if (!jobs.find(j => j.url === url)) {
