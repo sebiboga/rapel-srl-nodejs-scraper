@@ -13,37 +13,84 @@ const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
 async function searchJobRapid(brand) {
   const jobs = [];
-  const searchUrl = `https://www.jobrapid.ro/companie/${brand.toLowerCase().replace(/\s+/g, '-')}`;
+  const urlsToTry = [
+    `https://www.jobrapid.ro/companie/${brand.toLowerCase().replace(/\s+/g, '-')}`,
+    `https://www.jobrapid.ro/companie/sc-${brand.toLowerCase().replace(/\s+/g, '-')}-sa-1219.html`,
+    `https://www.jobrapid.ro/cauta?q=${encodeURIComponent(brand)}`
+  ];
+
+  for (const searchUrl of urlsToTry) {
+    try {
+      console.log(`Searching jobRapid.ro: ${searchUrl}`);
+      const res = await fetch(searchUrl, {
+        timeout: TIMEOUT,
+        headers: {
+          "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+        }
+      });
+
+      if (!res.ok) {
+        console.log(`  jobRapid.ro returned ${res.status} for ${searchUrl}`);
+        continue;
+      }
+
+      const html = await res.text();
+      const $ = cheerio.load(html);
+
+      $('a[href*="/locuri-de-munca/"]').each((i, el) => {
+        const href = $(el).attr('href');
+        const title = $(el).text().trim();
+        if (href && title && !jobs.find(j => j.url === href)) {
+          const url = href.startsWith('http') ? href : `https://www.jobrapid.ro${href}`;
+          jobs.push({ url, title, source: "jobRapid.ro" });
+        }
+      });
+
+      console.log(`  Found ${jobs.length} jobs on jobRapid.ro (from ${searchUrl})`);
+    } catch (err) {
+      console.log(`  jobRapid.ro error for ${searchUrl}: ${err.message}`);
+    }
+  }
+
+  return jobs;
+}
+
+async function searchJobradar24(brand) {
+  const jobs = [];
+  const searchUrl = `https://www.jobradar24.ro/anunturi?q=${encodeURIComponent(brand)}`;
 
   try {
-    console.log(`Searching jobRapid.ro: ${searchUrl}`);
+    console.log(`Searching jobradar24.ro: ${searchUrl}`);
     const res = await fetch(searchUrl, {
       timeout: TIMEOUT,
       headers: {
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+        "Accept-Language": "ro-RO,ro;q=0.9,en;q=0.8"
       }
     });
 
     if (!res.ok) {
-      console.log(`  jobRapid.ro returned ${res.status}`);
+      console.log(`  jobradar24.ro returned ${res.status}`);
       return jobs;
     }
 
     const html = await res.text();
     const $ = cheerio.load(html);
 
-    $('a[href*="/locuri-de-munca/"]').each((i, el) => {
+    $('a[href*="/anunt/"]').each((i, el) => {
       const href = $(el).attr('href');
       const title = $(el).text().trim();
-      if (href && title) {
-        const url = href.startsWith('http') ? href : `https://www.jobrapid.ro${href}`;
-        jobs.push({ url, title, source: "jobRapid.ro" });
+      if (href && title && !href.includes('/companie/')) {
+        const url = href.startsWith('http') ? href : `https://www.jobradar24.ro${href}`;
+        if (!jobs.find(j => j.url === url)) {
+          jobs.push({ url, title, source: "jobradar24.ro" });
+        }
       }
     });
 
-    console.log(`  Found ${jobs.length} jobs on jobRapid.ro`);
+    console.log(`  Found ${jobs.length} jobs on jobradar24.ro`);
   } catch (err) {
-    console.log(`  jobRapid.ro error: ${err.message}`);
+    console.log(`  jobradar24.ro error: ${err.message}`);
   }
 
   return jobs;
@@ -216,6 +263,7 @@ async function searchAllPortals(brand, testOnly = false) {
 
   const searches = [
     searchJobRapid(brand),
+    searchJobradar24(brand),
     searchEJobs(brand),
     searchBestJobs(brand),
     searchHipo(brand),
