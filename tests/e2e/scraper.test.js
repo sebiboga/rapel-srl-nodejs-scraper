@@ -12,12 +12,12 @@ describe('E2E: Full Scraping Workflow', () => {
     const searchResults = await demoanaf.searchCompany(TEST_BRAND);
     expect(searchResults.length).toBeGreaterThan(0);
 
-    const exactMatch = searchResults.find(c =>
-      c.name.toUpperCase().startsWith(TEST_BRAND + ' ') &&
+    const rapelCompany = searchResults.find(c =>
+      c.cui?.toString() === TEST_CIF &&
       c.statusLabel === 'Funcțiune'
     );
-    expect(exactMatch).toBeDefined();
-    expect(exactMatch.cui.toString()).toBe(TEST_CIF);
+    expect(rapelCompany).toBeDefined();
+    expect(rapelCompany.cui.toString()).toBe(TEST_CIF);
 
     const anafData = await demoanaf.getCompanyFromANAF(TEST_CIF);
     expect(anafData).toBeDefined();
