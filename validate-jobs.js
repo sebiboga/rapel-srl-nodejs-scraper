@@ -9,7 +9,7 @@
  * SCOPE: Generic — works with ANY CIF, single URL, or list from file.
  * Used for ad-hoc cleanup and debugging. NOT called from CI.
  *
- * For the fast CI-friendly EPAM-only HEAD check, see
+ * For the fast CI-friendly HEAD-only check, see
  * tests/validate-epam-jobs.js.
  *
  * Usage:
@@ -135,8 +135,8 @@ Usage:
   node validate-jobs.js --file <file.json>       - Check URLs from JSON file
 
 Examples:
-  node validate-jobs.js 33159615                 - Validate EPAM jobs
-  node validate-jobs.js --url "https://careers.epam.com/en/vacancy/123_test"
+  node validate-jobs.js 5665609                  - Validate RAPEL jobs
+  node validate-jobs.js --url "https://www.jobrapid.ro/locuri-de-munca/test"
   node validate-jobs.js --urls "url1" "url2" "url3"
   node validate-jobs.js --file jobs.json
 `;

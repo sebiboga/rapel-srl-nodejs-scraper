@@ -1,58 +1,45 @@
-# Robots.txt Analysis — EPAM Careers
+# ROBOTS.txt Analysis — jobRapid.ro
 
-Sursa: https://careers.epam.com/robots.txt
-
-## Reguli
+Sursa: `https://www.jobrapid.ro/robots.txt`
 
 ```
-User-agent: LinkedInBot
-Allow: /
-
 User-agent: *
-Disallow: /en/application
-Disallow: /ru/application
-Disallow: /api
-Disallow: /api/*
-Disallow: /*?skill*
-Disallow: /*?search*
-Disallow: /*?query*
-Disallow: /*?specialization*
-Disallow: /*?utm*
-Disallow: /none
-Disallow: /*?ref*
-Disallow: /*?job_title*
-Disallow: /*[blogId]*
-Disallow: /*[jobId]*
-Disallow: /*[cms]*
-Disallow: /*[uid]*
-Disallow: /*?page*
-Disallow: /*?gclid*
-Disallow: /blog
-Disallow: /blog/*
-Disallow: /*/vacancy/*
-Disallow: /ai-interviewer
-Disallow: /ai-interviewer/*
+Disallow: /cgi-bin/
+Disallow: /admin/
+Disallow: /user/
+Disallow: /register/
+Disallow: /login/
+Disallow: /password/
+Disallow: /aplica/
+Disallow: /apply/
+Disallow: /my/
 ```
 
 ## Interpretare
 
-| Cale | Accesibil? | Ce conține |
-|---|---|---|
-| `/` (landing) | ✅ Da | Paginile principale per-locale |
-| `/en/jobs`, `/fr/jobs`, etc. | ✅ Da | Listări de job-uri (front-end) |
-| `/api/*` | ❌ **Disallowed** | API-ul JSON de la care scraper-ul nostru extrage datele |
-| `/*/vacancy/*` | ❌ **Disallowed** | Paginile individuale de job |
-| `/en/application` | ❌ Disallowed | Pagina de aplicare |
-| `/blog/*` | ❌ Disallowed | Blogul |
-| `/ai-interviewer/*` | ❌ Disallowed | Intervievator AI |
+| Regulă | Impact |
+|--------|--------|
+| Disallow: /cgi-bin/ | Fără impact — nu e relevant |
+| Disallow: /admin/ | Fără impact — nu accesăm |
+| Disallow: /user/ | Fără impact — nu accesăm |
+| Disallow: /register/ | Fără impact — nu accesăm |
+| Disallow: /login/ | Fără impact — nu accesăm |
+| Disallow: /password/ | Fără impact — nu accesăm |
+| Disallow: /aplica/ | **Blochează paginile de aplicare** — scraperul NU le accesează |
+| Disallow: /apply/ | **Blochează paginile de aplicare** — scraperul NU le accesează |
+| Disallow: /my/ | Fără impact — cont utilizator, nu accesăm |
 
-## Recomandare
+## Practică de scraping
 
-robots.txt NU este legal binding, dar reprezintă intenția proprietarului site-ului.
+- Scraperul accesează doar paginile publice de listare: `/companie/rapel-srl`, `/cauta?q=RAPEL`
+- Se adaugă delay de 1s între request-uri
+- Se folosește User-Agent: `job_seeker_ro_spider`
+- Paginile de aplicare (`/aplica/`, `/apply/`) sunt blocate explicit și nu sunt accesate
 
-- API-ul `/api/jobs/v2/search/...` e **disallowed** de robots.txt. În practică, serverul nu blochează cererile (răspunde cu 200 OK cu `User-Agent` normal).
-- Paginile individuale de job (`/en/vacancy/...`) sunt și ele disallowed. Noi nu le scraper-uim direct — doar le verificăm accesibilitatea (HEAD request) în E2E tests.
-- Dacă se dorește conformare strictă, singura alternativă ar fi scraper-uirea paginii `/en/jobs` din front-end (care e allowed).
-- Scraperul curent face o singură cerere per pagină (10 job-uri) cu delay de 1s între pagini — comportament rezonabil, nu agresiv.
+## Rapel.biz
 
-**Concluzie**: Risc minim. API-ul e public, răspunde fără autentificare, iar scraperul e politicos (rate limiting, User-Agent standard, o singură cerere simultană).
+Site-ul `rapel.biz` nu are fișier robots.txt (404). Scraperul nu accesează direct `rapel.biz` — numele e folosit doar ca etichetă (`source: "rapel.biz"`) în datele trimise la SOLR.
+
+## User-Agent
+
+Toate request-urile se identifică cu `job_seeker_ro_spider`.

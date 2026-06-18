@@ -6,7 +6,7 @@ import { fileURLToPath } from "url";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const REPO = process.env.GITHUB_REPOSITORY;
 const TOKEN = process.env.GITHUB_TOKEN;
-const SCRAPER_YML = ".github/workflows/job-seeker-ro-spider.yml";
+const SCRAPER_YML = ".github/workflows/scrape.yml";
 
 
 function repoUrl(apiPath) {
@@ -76,7 +76,7 @@ describe("Repository Configuration", () => {
       const html = await res.text();
       expect(html).toContain("<!DOCTYPE html>");
       expect(html).toContain("peviitor");
-      expect(html).toContain("EPAM");
+      expect(html).toContain("RAPEL");
       console.log(`✅ GitHub Pages HTML loaded from ${pagesUrl}`);
     });
   });
@@ -97,7 +97,7 @@ describe("Repository Configuration", () => {
       const ymlPath = path.resolve(__dirname, "../..", SCRAPER_YML);
       expect(fs.existsSync(ymlPath)).toBe(true);
       const content = fs.readFileSync(ymlPath, "utf-8");
-      expect(content).toContain("name: Oportunitati SI Cariere");
+      expect(content).toContain("name: WebScraper RAPEL to Peviitor");
       expect(content).toContain("schedule");
       expect(content).toContain("workflow_dispatch");
       console.log(`✅ ${SCRAPER_YML} exists with expected content`);

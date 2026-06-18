@@ -1,18 +1,18 @@
-# EPAM SYSTEMS INTERNATIONAL SRL
+# RAPEL SRL
 
 ## Company Info
 
 | Field | Value |
 |-------|-------|
-| CIF | 33159615 |
-| Brand | EPAM |
+| CIF | 5665609 |
+| Brand | RAPEL |
 | Status | activ |
-| Location | IANCU DE HUNEDOARA, 48, Bucureşti Sectorul 1, Bucureşti |
-| Website | [https://www.epam.com](https://www.epam.com) |
-| Careers | [https://careers.epam.com](https://careers.epam.com) |
+| Location | Răhău |
+| Website | [https://www.rapel.biz](https://www.rapel.biz) |
+| Careers | [https://www.rapel.biz](https://www.rapel.biz) |
 | Last Scraped | 2026-06-17 |
 
-## Current Job Listings (71)
+## Current Job Listings (0)
 
 _Generated: 2026-06-17T13:41:21.692Z_
 
