@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Test Results — RAPEL SRL</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: linear-gradient(135deg, #fdf6f0 0%, #f5e6d3 50%, #f0dcc8 100%);
+      color: #2d2a24;
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+    .container { max-width: 640px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+    header { text-align: center; padding: 1.5rem 0 2rem; }
+    header h1 { font-size: 1.5rem; font-weight: 700; color: #c44536; margin-bottom: 0.25rem; }
+    header p { color: #7d6b5a; font-size: 0.9rem; }
+    .card {
+      background: #fffcf9;
+      border-radius: 16px;
+      box-shadow: 0 4px 24px rgba(90, 60, 40, 0.10);
+      overflow: hidden;
+      margin-bottom: 1.25rem;
+    }
+    .card-header {
+      padding: 1.1rem 1.5rem;
+      border-bottom: 1px solid #f0e4d8;
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: #5a4a3a;
+    }
+    .card-body { padding: 1.5rem; }
+    .report-list { list-style: none; }
+    .report-list li { padding: 0.75rem 0; border-bottom: 1px solid #f0e4d8; }
+    .report-list li:last-child { border-bottom: none; }
+    .report-list a {
+      color: #c44536;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.95rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .report-list a:hover { text-decoration: underline; }
+    .report-list .badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 6px;
+      font-size: 0.72rem;
+      font-weight: 600;
+    }
+    .badge-unit { background: #e3f2fd; color: #1565c0; }
+    .badge-integration { background: #f3e5f5; color: #7b1fa2; }
+    .badge-e2e { background: #e8f5e9; color: #2e7d32; }
+    .badge-consistency { background: #fff3e0; color: #e65100; }
+    .badge-date {
+      color: #9a8a7a;
+      font-size: 0.78rem;
+      font-weight: 400;
+      margin-left: auto;
+    }
+    .back-link {
+      display: inline-block;
+      margin-top: 1rem;
+      color: #7d6b5a;
+      text-decoration: none;
+      font-size: 0.85rem;
+    }
+    .back-link:hover { color: #c44536; }
+    footer {
+      text-align: center;
+      padding: 2rem 0;
+      color: #9a8a7a;
+      font-size: 0.8rem;
+    }
+    footer a { color: #c44536; text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <h1>Rezultate Teste</h1>
+    <p>RAPEL SRL</p>
+  </header>
+
+  <div class="card">
+    <div class="card-header">Rapoarte disponibile</div>
+    <div class="card-body">
+      <ul class="report-list">
+        <li>
+          <a href="pre-scrape-unit.html">
+            <span class="badge badge-unit">Unit</span>
+            Pre-scrape: Teste Unitare
+          </a>
+        </li>
+        <li>
+          <a href="pre-scrape-integration.html">
+            <span class="badge badge-integration">Integration</span>
+            Pre-scrape: Teste de Integrare
+          </a>
+        </li>
+        <li>
+          <a href="post-scrape.html">
+            <span class="badge badge-e2e">E2E</span>
+            Post-scrape: Teste End-to-End
+          </a>
+        </li>
+        <li>
+          <a href="post-scrape-consistency.html">
+            <span class="badge badge-consistency">Consistency</span>
+            Post-scrape: Teste de Consistență
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <a href="../" class="back-link">&larr; Înapoi la pagina principală</a>
+
+  <footer>
+    <a href="https://github.com/sebiboga/rapel-srl-nodejs-scraper" target="_blank">GitHub</a> &middot;
+    <a href="https://peviitor.ro/" target="_blank">peviitor.ro</a>
+  </footer>
+</div>
+</body>
+</html>
