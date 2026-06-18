@@ -102,9 +102,12 @@ async function searchANOFM(cif) {
     }
     const data = await res.json();
     for (const row of data.rows || []) {
+      const locationParts = (row.address_locality_name || '').split('>').map(s => s.trim());
+      const location = locationParts.length > 1 ? locationParts[locationParts.length - 1] : locationParts[0];
       jobs.push({
         url: `https://mediere.anofm.ro/app/module/mediere/job/${row.id}`,
         title: row.occupation,
+        location: location || undefined,
         source: "ANOFM"
       });
     }
@@ -163,8 +166,11 @@ function mapToJobModel(rawJob, cif, companyName = COMPANY_NAME) {
   const now = new Date().toISOString();
 
   const location = [];
+  if (rawJob.location) {
+    location.push(rawJob.location);
+  }
   const locationFromTitle = extractLocationFromTitle(rawJob.title);
-  if (locationFromTitle) {
+  if (locationFromTitle && !location.includes(locationFromTitle)) {
     location.push(locationFromTitle);
   }
 

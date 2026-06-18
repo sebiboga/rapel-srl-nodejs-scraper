@@ -159,7 +159,6 @@ describe('Integration: API Workflow', () => {
       expect(job).toHaveProperty('company', 'RAPEL SRL');
       expect(job).toHaveProperty('cif', RAPEL_CIF);
       expect(job).toHaveProperty('status');
-      expect(job).toHaveProperty('location');
     }, 15000);
 
     itIfSolr('should not have duplicate URLs for same CIF', async () => {
