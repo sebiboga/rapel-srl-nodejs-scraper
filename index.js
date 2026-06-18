@@ -149,6 +149,7 @@ function addCifToExistingJobs(existingJobs, cif, companyName) {
 
   return existingJobs.map(job => {
     const updated = { ...job };
+    delete updated._version_;
     updated.cif = cif;
     updated.company = companyName;
     updated.date = new Date().toISOString();
