@@ -10,35 +10,11 @@
 | Location | JUDEŢUL ALBA, SAT RĂHĂU, COM. SEBEŞ, STR. PRINCIPALĂ, NR. 18A |
 | Website | [https://www.rapel.biz](https://www.rapel.biz) |
 | Careers | [https://www.rapel.biz](https://www.rapel.biz) |
-| Last Scraped | 2026-06-18 |
+| Last Scraped | 2026-06-19 |
 
 ## Current Job Listings (6)
 
-_Generated: 2026-06-18T12:06:13.875Z_
-
-### MAROCHINER-CONFECTIONER MAROCHINARIE, DUPA COMANDA
-
-- **URL:** [https://mediere.anofm.ro/app/module/mediere/job/3212716](https://mediere.anofm.ro/app/module/mediere/job/3212716)
-- **Location:** Rahau
-- **Status:** published
-
-### MAROCHINER-CONFECTIONER MAROCHINARIE, DUPA COMANDA
-
-- **URL:** [https://mediere.anofm.ro/app/module/mediere/job/3212735](https://mediere.anofm.ro/app/module/mediere/job/3212735)
-- **Location:** Rahau
-- **Status:** published
-
-### MUNCITOR NECALIFICAT LA ASAMBLAREA, MONTAREA PIESELOR
-
-- **URL:** [https://mediere.anofm.ro/app/module/mediere/job/3258027](https://mediere.anofm.ro/app/module/mediere/job/3258027)
-- **Location:** Rahau
-- **Status:** published
-
-### MUNCITOR NECALIFICAT LA ASAMBLAREA, MONTAREA PIESELOR
-
-- **URL:** [https://mediere.anofm.ro/app/module/mediere/job/3271112](https://mediere.anofm.ro/app/module/mediere/job/3271112)
-- **Location:** Rahau
-- **Status:** published
+_Generated: 2026-06-19T10:23:07.114Z_
 
 ### Marochiner-confectioner Marochinarie, Dupa Comanda
 
@@ -48,4 +24,28 @@ _Generated: 2026-06-18T12:06:13.875Z_
 ### Muncitor Necalificat La Asamblarea, Montarea Pieselor
 
 - **URL:** [https://www.jobrapid.ro/locuri-de-munca/muncitor-necalificat-la-asamblarea-montarea-pieselor-in-alba-iulia-1539391.html](https://www.jobrapid.ro/locuri-de-munca/muncitor-necalificat-la-asamblarea-montarea-pieselor-in-alba-iulia-1539391.html)
+- **Status:** scraped
+
+### MUNCITOR NECALIFICAT LA ASAMBLAREA, MONTAREA PIESELOR
+
+- **URL:** [https://mediere.anofm.ro/app/module/mediere/job/3271112](https://mediere.anofm.ro/app/module/mediere/job/3271112)
+- **Location:** RAHAU
+- **Status:** scraped
+
+### MUNCITOR NECALIFICAT LA ASAMBLAREA, MONTAREA PIESELOR
+
+- **URL:** [https://mediere.anofm.ro/app/module/mediere/job/3258027](https://mediere.anofm.ro/app/module/mediere/job/3258027)
+- **Location:** RAHAU
+- **Status:** scraped
+
+### MAROCHINER-CONFECTIONER MAROCHINARIE, DUPA COMANDA
+
+- **URL:** [https://mediere.anofm.ro/app/module/mediere/job/3212735](https://mediere.anofm.ro/app/module/mediere/job/3212735)
+- **Location:** RAHAU
+- **Status:** scraped
+
+### MAROCHINER-CONFECTIONER MAROCHINARIE, DUPA COMANDA
+
+- **URL:** [https://mediere.anofm.ro/app/module/mediere/job/3212716](https://mediere.anofm.ro/app/module/mediere/job/3212716)
+- **Location:** RAHAU
 - **Status:** scraped
