@@ -10,11 +10,11 @@
 | Location | JUDEŢUL ALBA, SAT RĂHĂU, COM. SEBEŞ, STR. PRINCIPALĂ, NR. 18A |
 | Website | [https://www.rapel.biz](https://www.rapel.biz) |
 | Careers | [https://www.rapel.biz](https://www.rapel.biz) |
-| Last Scraped | 2026-06-20 |
+| Last Scraped | 2026-06-21 |
 
-## Current Job Listings (4)
+## Current Job Listings (6)
 
-_Generated: 2026-06-20T08:54:46.673Z_
+_Generated: 2026-06-21T09:46:27.097Z_
 
 ### Marochiner-confectioner Marochinarie, Dupa Comanda
 
@@ -35,5 +35,17 @@ _Generated: 2026-06-20T08:54:46.673Z_
 ### MUNCITOR NECALIFICAT LA ASAMBLAREA, MONTAREA PIESELOR
 
 - **URL:** [https://mediere.anofm.ro/app/module/mediere/job/3258027](https://mediere.anofm.ro/app/module/mediere/job/3258027)
+- **Location:** RAHAU
+- **Status:** scraped
+
+### MAROCHINER-CONFECTIONER MAROCHINARIE, DUPA COMANDA
+
+- **URL:** [https://mediere.anofm.ro/app/module/mediere/job/3212735](https://mediere.anofm.ro/app/module/mediere/job/3212735)
+- **Location:** RAHAU
+- **Status:** scraped
+
+### MAROCHINER-CONFECTIONER MAROCHINARIE, DUPA COMANDA
+
+- **URL:** [https://mediere.anofm.ro/app/module/mediere/job/3212716](https://mediere.anofm.ro/app/module/mediere/job/3212716)
 - **Location:** RAHAU
 - **Status:** scraped
