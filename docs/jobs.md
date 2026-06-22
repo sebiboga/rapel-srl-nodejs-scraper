@@ -10,11 +10,11 @@
 | Location | JUDEŢUL ALBA, SAT RĂHĂU, COM. SEBEŞ, STR. PRINCIPALĂ, NR. 18A |
 | Website | [https://www.rapel.biz](https://www.rapel.biz) |
 | Careers | [https://www.rapel.biz](https://www.rapel.biz) |
-| Last Scraped | 2026-06-21 |
+| Last Scraped | 2026-06-22 |
 
 ## Current Job Listings (6)
 
-_Generated: 2026-06-21T09:46:27.097Z_
+_Generated: 2026-06-22T11:50:12.613Z_
 
 ### Marochiner-confectioner Marochinarie, Dupa Comanda
 
