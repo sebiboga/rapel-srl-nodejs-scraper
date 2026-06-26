@@ -7,14 +7,14 @@
 | CIF | 5665609 |
 | Brand | RAPEL |
 | Status | activ |
-| Location | JUDEŢUL ALBA, SAT RĂHĂU, COM. SEBEŞ, STR. PRINCIPALĂ, NR. 18A |
+| Location | Str. PRINCIPALĂ, 1, Sat Răhău, Municipiul Sebeş, Alba |
 | Website | [https://www.rapel.biz](https://www.rapel.biz) |
 | Careers | [https://www.rapel.biz](https://www.rapel.biz) |
-| Last Scraped | 2026-06-25 |
+| Last Scraped | 2026-06-26 |
 
 ## Current Job Listings (6)
 
-_Generated: 2026-06-25T08:58:33.297Z_
+_Generated: 2026-06-26T09:22:01.086Z_
 
 ### Marochiner-confectioner Marochinarie, Dupa Comanda
 
