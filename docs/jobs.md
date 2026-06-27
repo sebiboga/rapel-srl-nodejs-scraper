@@ -10,11 +10,11 @@
 | Location | Str. PRINCIPALĂ, 1, Sat Răhău, Municipiul Sebeş, Alba |
 | Website | [https://www.rapel.biz](https://www.rapel.biz) |
 | Careers | [https://www.rapel.biz](https://www.rapel.biz) |
-| Last Scraped | 2026-06-26 |
+| Last Scraped | 2026-06-27 |
 
 ## Current Job Listings (6)
 
-_Generated: 2026-06-26T09:22:01.086Z_
+_Generated: 2026-06-27T08:33:35.882Z_
 
 ### Marochiner-confectioner Marochinarie, Dupa Comanda
 
