@@ -10,42 +10,18 @@
 | Location | Str. PRINCIPALĂ, 1, Sat Răhău, Municipiul Sebeş, Alba |
 | Website | [https://www.rapel.biz](https://www.rapel.biz) |
 | Careers | [https://www.rapel.biz](https://www.rapel.biz) |
-| Last Scraped | 2026-06-29 |
+| Last Scraped | 2026-07-05 |
 
-## Current Job Listings (6)
+## Current Job Listings (2)
 
-_Generated: 2026-06-29T10:53:25.739Z_
-
-### Marochiner-confectioner Marochinarie, Dupa Comanda
-
-- **URL:** [https://www.jobrapid.ro/locuri-de-munca/marochiner-confectioner-marochinarie-dupa-comanda-in-alba-iulia-1493264.html](https://www.jobrapid.ro/locuri-de-munca/marochiner-confectioner-marochinarie-dupa-comanda-in-alba-iulia-1493264.html)
-- **Status:** scraped
+_Generated: 2026-07-05T08:50:05.803Z_
 
 ### Muncitor Necalificat La Asamblarea, Montarea Pieselor
 
 - **URL:** [https://www.jobrapid.ro/locuri-de-munca/muncitor-necalificat-la-asamblarea-montarea-pieselor-in-alba-iulia-1539391.html](https://www.jobrapid.ro/locuri-de-munca/muncitor-necalificat-la-asamblarea-montarea-pieselor-in-alba-iulia-1539391.html)
 - **Status:** scraped
 
-### MUNCITOR NECALIFICAT LA ASAMBLAREA, MONTAREA PIESELOR
+### Marochiner-confectioner Marochinarie, Dupa Comanda
 
-- **URL:** [https://mediere.anofm.ro/app/module/mediere/job/3271112](https://mediere.anofm.ro/app/module/mediere/job/3271112)
-- **Location:** RAHAU
-- **Status:** scraped
-
-### MUNCITOR NECALIFICAT LA ASAMBLAREA, MONTAREA PIESELOR
-
-- **URL:** [https://mediere.anofm.ro/app/module/mediere/job/3258027](https://mediere.anofm.ro/app/module/mediere/job/3258027)
-- **Location:** RAHAU
-- **Status:** scraped
-
-### MAROCHINER-CONFECTIONER MAROCHINARIE, DUPA COMANDA
-
-- **URL:** [https://mediere.anofm.ro/app/module/mediere/job/3212735](https://mediere.anofm.ro/app/module/mediere/job/3212735)
-- **Location:** RAHAU
-- **Status:** scraped
-
-### MAROCHINER-CONFECTIONER MAROCHINARIE, DUPA COMANDA
-
-- **URL:** [https://mediere.anofm.ro/app/module/mediere/job/3212716](https://mediere.anofm.ro/app/module/mediere/job/3212716)
-- **Location:** RAHAU
+- **URL:** [https://www.jobrapid.ro/locuri-de-munca/marochiner-confectioner-marochinarie-dupa-comanda-in-alba-iulia-1493264.html](https://www.jobrapid.ro/locuri-de-munca/marochiner-confectioner-marochinarie-dupa-comanda-in-alba-iulia-1493264.html)
 - **Status:** scraped
