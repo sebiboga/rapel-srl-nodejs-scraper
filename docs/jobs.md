@@ -10,11 +10,11 @@
 | Location | Str. PRINCIPALĂ, 1, Sat Răhău, Municipiul Sebeş, Alba |
 | Website | [https://www.rapel.biz](https://www.rapel.biz) |
 | Careers | [https://www.rapel.biz](https://www.rapel.biz) |
-| Last Scraped | 2026-07-11 |
+| Last Scraped | 2026-07-12 |
 
 ## Current Job Listings (4)
 
-_Generated: 2026-07-11T07:51:38.262Z_
+_Generated: 2026-07-12T08:13:24.426Z_
 
 ### Muncitor Necalificat La Asamblarea, Montarea Pieselor
 
